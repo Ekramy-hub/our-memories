@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Story ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left,#ffe0eb,transparent 45%),
+    radial-gradient(circle at bottom right,#eadbfa,transparent 45%),
+    linear-gradient(135deg,#fcecf0,#f7e9f1,#f5e8e5);
+  font-family: 'Cairo', sans-serif;
+  color: #805a69;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 12px;
+  overflow-x: hidden;
+}
+
+.decor {
+  position: fixed;
+  color: #d99aaf;
+  opacity: .35;
+  font-size: 25px;
+  pointer-events: none;
+}
+
+.d1 {top: 8%; right: 8%;}
+.d2 {top: 20%; left: 7%;}
+.d3 {bottom: 12%; right: 12%;}
+.d4 {bottom: 20%; left: 8%;}
+
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  font-family: 'Amiri',serif;
+  font-size: 40px;
+  color: #a75f7d;
+}
+
+.header p {
+  font-size: 13px;
+  color: #b58a9b;
+}
+
+.book {
+  width: min(90vw,430px);
+  height: 550px;
+  position: relative;
+  perspective: 1800px;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  border-radius: 5px 15px 15px 5px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform-origin: right center;
+  backface-visibility: hidden;
+  transition: transform .85s ease;
+  overflow: hidden;
+  border: 1px solid #f0dce3;
+  box-shadow: 0 12px 35px #80536b20;
+  background: #fffaf8;
+}
+
+.page:nth-child(3n+1) {
+  background: linear-gradient(145deg,#fff8f6,#fce8ef);
+}
+
+.page:nth-child(3n+2) {
+  background: linear-gradient(145deg,#fffafd,#f0e8f8);
+}
+
+.page:nth-child(3n) {
+  background: linear-gradient(145deg,#fffaf5,#f8e5df);
+}
+
+.page::before {
+  content: "♡";
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  color: #e4a5b9;
+  font-size: 22px;
+  opacity: .65;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  background: linear-gradient(to right,#e8cbd8,transparent);
+}
+
+.cover {
+  background: linear-gradient(145deg,#b87591,#875a78) !important;
+  border: 8px double #f6dce5;
+  color: white;
+}
+
+.cover h2 {
+  font-family: 'Amiri',serif;
+  font-size: 48px;
+  color: #fff4f7;
+  margin: 15px 0;
+}
+
+.cover p {
+  color: #ffe6ee;
+}
+
+.cover::before,
+.cover::after {
+  display: none;
+}
+
+.cover .heart {
+  color: #ffe0e9;
+}
+
+.page h2 {
+  font-family: 'Amiri',serif;
+  font-size: 30px;
+  color: #ad6683;
+  margin-bottom: 12px;
+}
+
+.page p {
+  font-size: 14px;
+  line-height: 2.2;
+  color: #856b78;
+}
+
+.heart {
+  color: #d98da8;
+  font-size: 35px;
+  margin: 10px;
+}
+
+.photo-frame {
+  width: 100%;
+  background: white;
+  padding: 9px 9px 15px;
+  border-radius: 8px;
+  box-shadow: 0 5px 18px #a16d8025;
+  margin: 15px 0;
+  transform: rotate(-1deg);
+}
+
+.photo-frame:nth-of-type(even) {
+  transform: rotate(1deg);
+}
+
+.photo {
+  width: 100%;
+  height: 235px;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+  background: linear-gradient(135deg,#f6dce5,#e8d9f2);
+}
+
+.caption {
+  font-family: 'Amiri',serif;
+  color: #b06f88;
+  font-size: 19px;
+  margin-top: 7px;
+}
+
+.quote {
+  font-family: 'Amiri',serif;
+  font-size: 22px !important;
+  color: #b66e8b !important;
+  margin-top: 15px;
+}
+
+.page-number {
+  position: absolute;
+  bottom: 14px;
+  font-size: 12px;
+  color: #c49bab;
+}
+
+.flipped {
+  transform: rotateY(-180deg);
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.controls button {
+  background: linear-gradient(135deg,#c17b98,#9b6583);
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-family: 'Cairo';
+  cursor: pointer;
+  transition: .3s;
+  box-shadow: 0 4px 12px #a46d8425;
+}
+
+.controls button:hover {
+  transform: translateY(-3px);
+}
+
+.controls button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#counter {
+  font-size: 12px;
+  color: #a87890;
+}
+
+.footer {
+  margin-top: 25px;
+  color: #b17e93;
+  font-family: 'Amiri',serif;
+  font-size: 19px;
+}
+
+@media(max-width:450px) {
+  .book {height: 520px;}
+  .page {padding: 28px 19px;}
+  .photo {height: 205px;}
+  .page p {font-size: 13px;}
+  .header h1 {font-size: 34px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="decor d1">♡</div>
+<div class="decor d2">✿</div>
+<div class="decor d3">♥</div>
+<div class="decor d4">♡</div>
+
+<div class="header">
+  <h1>Our Love Story ♡</h1>
+  <p>كل صورة بتحكي حكاية وكل صفحة فيها ذكرى</p>
+</div>
+
+<div class="book" id="book">
+
+<!-- الغلاف -->
+<section class="page cover">
+  <div class="heart">♥</div>
+  <h2>كتاب ذكرياتنا</h2>
+  <p>إلى أجمل حكاية في حياتي</p>
+  <div class="heart">♡</div>
+  <p>افتحي الكتاب وخلينا نفتكر كل حاجة حلوة</p>
+</section>
+
+<!-- البداية -->
+<section class="page">
+  <h2>بداية الحكاية 🌸</h2>
+  <p>
+    كل حكاية حلوة بيكون ليها بداية،
+    وبدايتنا كانت من أجمل الصدف
+    اللي حصلت في حياتي.
+  </p>
+  <div class="heart">♡</div>
+  <p class="quote">"ومن هنا بدأت حكايتنا"</p>
+  <div class="page-number">01</div>
+</section>
+
+<!-- الصور -->
+<section class="page">
+  <h2>ذكرى جميلة 📸</h2>
+  <div class="photo-frame">
+    <img src="photo1.jpg" class="photo" alt="ذكرياتنا 1">
+    <div class="caption">لحظة مش بنساها ♡</div>
+  </div>
+  <p>في صور بتفضل جوا القلب مهما الوقت عدى.</p>
+  <div class="page-number">02</div>
+</section>
+
+<section class="page">
+  <h2>ضحكتك ❤️</h2>
+  <div class="photo-frame">
+    <img src="photo2.jpg" class="photo" alt="ذكرياتنا 2">
+    <div class="caption">أحلى ابتسامة</div>
+  </div>
+  <p>من أجمل تفاصيل الدنيا عندي.</p>
+  <div class="page-number">03</div>
+</section>
+
+<section class="page">
+  <h2>يوم مميز 🌷</h2>
+  <div class="photo-frame">
+    <img src="photo3.jpg" class="photo" alt="ذكرياتنا 3">
+    <div class="caption">يوم من أيامنا</div>
+  </div>
+  <p>يا ريت كل الأيام تبقى مليانة لحظات زي دي.</p>
+  <div class="page-number">04</div>
+</section>
+
+<section class="page">
+  <h2>أحلى تفاصيلنا 💗</h2>
+  <div class="photo-frame">
+    <img src="photo4.jpg" class="photo" alt="ذكرياتنا 4">
+    <div class="caption">تفاصيل صغيرة وحب كبير</div>
+  </div>
+  <p>أوقات أبسط اللحظات بتكون أجمل الذكريات.</p>
+  <div class="page-number">05</div>
+</section>
+
+<section class="page">
+  <h2>لحظة تانية ♡</h2>
+  <div class="photo-frame">
+    <img src="photo5.jpg" class="photo" alt="ذكرياتنا 5">
+    <div class="caption">من ألبومنا</div>
+  </div>
+  <p>كل صورة هنا ليها مكان خاص.</p>
+  <div class="page-number">06</div>
+</section>
+
+<section class="page">
+  <h2>ذكريات مش بتتنسي ✨</h2>
+  <div class="photo-frame">
+    <img src="photo6.jpg" class="photo" alt="ذكرياتنا 6">
+    <div class="caption">ذكرى على طول</div>
+  </div>
+  <p>الحلو في الذكريات إنها بتخلينا نعيش اللحظة تاني.</p>
+  <div class="page-number">07</div>
+</section>
+
+<section class="page">
+  <h2>صورة بحبها 💕</h2>
+  <div class="photo-frame">
+    <img src="photo7.jpg" class="photo" alt="ذكرياتنا 7">
+    <div class="caption">من أجمل صورنا</div>
+  </div>
+  <p>صورة واحدة ممكن تحكي ألف حكاية.</p>
+  <div class="page-number">08</div>
+</section>
+
+<section class="page">
+  <h2>وآخر صورة في الألبوم 🌹</h2>
+  <div class="photo-frame">
+    <img src="photo8.jpg" class="photo" alt="ذكرياتنا 8">
+    <div class="caption">لسه في صور كتير جاية</div>
+  </div>
+  <p>لسه ألبوم ذكرياتنا بيتكتب.</p>
+  <div class="page-number">09</div>
+</section>
+
+<!-- رسالة -->
+<section class="page">
+  <h2>رسالة ليكي 💌</h2>
+  <p>
+    عايزك تعرفي إن كل ذكرى جمعتنا
+    غالية عندي، وإن وجودك في حكايتي
+    حاجة جميلة بتمنى أفضل أقدر أحافظ عليها.
+  </p>
+  <div class="heart">♥</div>
+  <p class="quote">"إنتي ذكرى حلوة وحاضر جميل"</p>
+  <div class="page-number">10</div>
+</section>
+
+<!-- النهاية -->
+<section class="page">
+  <div class="heart">♥</div>
+  <h2>لسه الحكاية مكملة</h2>
+  <p>
+    الكتاب ده ليه صفحات كتير،
+    ولسه في ذكريات وصور وضحكات
+    مستنيانا نضيفها.
+  </p>
+  <p class="quote">
+    بحب كل لحظة حلوة في حكايتنا ♡
+  </p>
+  <div class="heart">♡</div>
+  <div class="page-number">11</div>
+</section>
+
+</div>
+
+<div class="controls">
+  <button id="prev" onclick="previousPage()">❯ السابق</button>
+  <span id="counter">الغلاف</span>
+  <button id="next" onclick="nextPage()">التالي ❮</button>
+</div>
+
+<div class="footer">
+  Made with Love ♡
+</div>
+
+<script>
+const pages = document.querySelectorAll('.page');
+const next = document.getElementById('next');
+const prev = document.getElementById('prev');
+const counter = document.getElementById('counter');
+
+let currentPage = 0;
+
+function updateBook() {
+  pages.forEach((page, index) => {
+    page.classList.toggle('flipped', index < currentPage);
+    page.style.zIndex = pages.length - index;
+  });
+
+  prev.disabled = currentPage === 0;
+  next.disabled = currentPage === pages.length;
+
+  counter.textContent =
+    currentPage === 0 ? 'الغلاف ♡' :
+    currentPage === pages.length ? 'النهاية ♥' :
+    `صفحة ${currentPage} من ${pages.length - 1}`;
+}
+
+function nextPage() {
+  if (currentPage < pages.length) {
+    currentPage++;
+    updateBook();
+  }
+}
+
+function previousPage() {
+  if (currentPage > 0) {
+    currentPage--;
+    updateBook();
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') nextPage();
+  if (e.key === 'ArrowRight') previousPage();
+});
+
+updateBook();
+</script>
+
+</body>
+</html>
